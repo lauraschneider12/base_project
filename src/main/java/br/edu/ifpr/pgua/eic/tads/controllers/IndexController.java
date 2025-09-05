@@ -6,6 +6,6 @@ import io.javalin.http.Handler;
 public class IndexController {
     
     public Handler get = ctx ->{
-        ctx.render("index.html");
+        ctx.render("index.ftl");
     };
 }

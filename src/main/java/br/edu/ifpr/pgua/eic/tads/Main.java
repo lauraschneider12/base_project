@@ -5,32 +5,39 @@ import java.util.ArrayList;
 import br.edu.ifpr.pgua.eic.tads.controllers.CadastroController;
 import br.edu.ifpr.pgua.eic.tads.controllers.IndexController;
 import br.edu.ifpr.pgua.eic.tads.utils.JavalinUtils;
+import freemarker.template.Configuration;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import io.javalin.rendering.template.JavalinFreemarker;
 import br.edu.ifpr.pgua.eic.tads.models.Contato;
 import br.edu.ifpr.pgua.eic.tads.models.Agenda;
 
-
 public class Main {
 
-     public static ArrayList<Contato> databaseContato = new ArrayList<>();
-    public static void main( String[] args ){
+    public static ArrayList<Contato> databaseContato = new ArrayList<>();
 
-        //Contato contato = new Contato("Augusto","augusto123@gmail.com","95982078972");
+    public static void main(String[] args) {
 
-        //Agenda  agenda = new Agenda("info24", "online");
-        //agenda.adicionarContato(contato);
-       // System.out.println(agenda);
+        // Contato contato = new
+        // Contato("Augusto","augusto123@gmail.com","95982078972");
 
-       Javalin app =  Javalin.create(config ->{
-        config.staticFiles.add("/public", Location.CLASSPATH);
-       }).start(7000);
-       CadastroController cadastroController = new CadastroController();
-       IndexController indexController = new IndexController();
+        // Agenda agenda = new Agenda("info24", "online");
+        // agenda.adicionarContato(contato);
+        // System.out.println(agenda);
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_33);
+        cfg.setClassForTemplateLoading(Main.class, "/public/templates");
+        cfg.setDefaultEncoding("UTF-8");
 
-       app.get("/index", indexController.get);
-       
-       app.get("/cadastro", cadastroController.get);
-        
+        Javalin app = Javalin.create(config -> {
+            config.staticFiles.add("/public", Location.CLASSPATH);
+            config.fileRenderer(new JavalinFreemarker(cfg));
+        }).start(5000);
+        CadastroController cadastroController = new CadastroController();
+        IndexController indexController = new IndexController();
+
+        app.get("/index", indexController.get);
+
+        app.get("/cadastro", cadastroController.get);
+
     }
 }
