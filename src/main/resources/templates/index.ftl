@@ -9,6 +9,7 @@
 <body>
     
 <h1>index</h1>
+<a class="btn" href="/cadastro"> aperte </a>
        
 </form>
 </body>
