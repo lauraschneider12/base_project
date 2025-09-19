@@ -15,6 +15,7 @@ public class Main {
 
        Rotas rotas = new Rotas();
        AppConfig appConfig = new AppConfig();
+       
 
        rotas.registrarRotas(appConfig.iniciaApp());
        
