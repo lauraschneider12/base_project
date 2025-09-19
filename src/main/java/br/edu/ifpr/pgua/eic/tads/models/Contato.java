@@ -1,6 +1,6 @@
 package br.edu.ifpr.pgua.eic.tads.models;
 
-import br.edu.ifpr.pgua.eic.tads.Main;
+
 
 public class Contato {
 
